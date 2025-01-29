@@ -17,7 +17,7 @@ create table if not exists veterinarios(
 `phoneNumber` varchar(18),
 `email` varchar(25),
 
-PRIMARY KEY (`idVeterinario`)
+constraint `pk_veterinarios` PRIMARY KEY (`idVeterinario`)
 );
 /*
 id numérico (clave primaria), número de chip (único), 
@@ -27,25 +27,15 @@ nombre, peso, fecha de nacimiento, tipo (perro, gato, otros)
 
 create table if not exists `vets`(
 `idVets` int(10) not null default '0',
-`idVeterinario` int(10),
+`idVeterinario` int(10) default null,
 `chip` varchar(9),
 `name` varchar(10),
 `peso` double(5 , 2),
 `fechaNacim` date ,
 `tipo` enum('dogs', 'cats', 'others'),
 
-PRIMARY KEY (`idVets`),
-CONSTRAINT `fk_vets_veterinarios` FOREIGN KEY (`idVeterinario`) REFERENCES `veterinarios` (`idVeterinario`)
+constraint `pk_vets`PRIMARY KEY (`idVets`),
+CONSTRAINT `fk_vets_veterinarios` FOREIGN KEY (`idVeterinario`) 
+REFERENCES `veterinarios` (`idVeterinario`)
+ON DELETE SET NULL
 );
-
-alter table `vets`
-drop foreign key `fk_vets_veterinarios`;
-
-alter table `vets`
-modify column `idVeterinario` int(10) default null;
-
-alter table `vets`
-ADD CONSTRAINT `fk_vets_veterinarios`  FOREIGN KEY (`idVeterinario`)
-REFERENCES `veterinarios`(`idVeterinario`)
-ON DELETE SET NULL;
-
