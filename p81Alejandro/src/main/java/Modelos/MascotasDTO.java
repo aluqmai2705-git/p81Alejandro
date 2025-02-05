@@ -21,16 +21,17 @@ public class MascotasDTO {
     private String chip;
     private String name;
     private double peso;
-    private LocalDate fechaNacimiento;
-    private tipoMascota tipoMascota;
+    private LocalDate fechaNacim;
+    private String tipoMascota;
 
-    public MascotasDTO(int pk, int pk_Veterinario, String chip, String name, double peso, LocalDate fechaNacimiento, tipoMascota tipoMascota) {
+    public MascotasDTO(int pk, int pk_Veterinario, String chip, String name, 
+            double peso, LocalDate fechaNacimiento, String tipoMascota) {
         this.pk = pk;
         this.pk_Veterinario = pk_Veterinario;
         this.chip = chip;
         this.name = name;
         this.peso = peso;
-        this.fechaNacimiento = fechaNacimiento;
+        this.fechaNacim = fechaNacimiento;
         this.tipoMascota = tipoMascota;
     }
 
@@ -58,10 +59,10 @@ public class MascotasDTO {
     }
 
     public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
+        return fechaNacim;
     }
 
-    public tipoMascota getTipoMascota() {
+    public String getTipoMascota() {
         return tipoMascota;
     }
 
@@ -86,27 +87,29 @@ public class MascotasDTO {
     }
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+        this.fechaNacim = fechaNacimiento;
     }
 
-    public void setTipoMascota(tipoMascota tipoMascota) {
+    public void setTipoMascota(String tipoMascota) {
         this.tipoMascota = tipoMascota;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("vetsDTO{");
+        sb.append("MascotasDTO{");
         sb.append("pk=").append(pk);
         sb.append(", pk_Veterinario=").append(pk_Veterinario);
         sb.append(", chip=").append(chip);
         sb.append(", name=").append(name);
         sb.append(", peso=").append(peso);
-        sb.append(", fechaNacimiento=").append(fechaNacimiento);
+        sb.append(", fechaNacim=").append(fechaNacim);
         sb.append(", tipoMascota=").append(tipoMascota);
         sb.append('}');
         return sb.toString();
     }
+
+    
     
     
 }

@@ -25,14 +25,14 @@ nombre, peso, fecha de nacimiento, tipo (perro, gato, otros)
 */
 
 
-create table if not exists `vets`(
-`idVets` int(10) not null default '0',
+create table if not exists `mascotas`(
+`idMascota` int(10) not null default '0',
 `idVeterinario` int(10) default null,
 `chip` varchar(9),
 `name` varchar(10),
 `peso` double(5 , 2),
 `fechaNacim` date ,
-`tipo` enum('dogs', 'cats', 'others'),
+`tipo` varchar(6),
 
 constraint `pk_vets`PRIMARY KEY (`idVets`),
 CONSTRAINT `fk_vets_veterinarios` FOREIGN KEY (`idVeterinario`) 

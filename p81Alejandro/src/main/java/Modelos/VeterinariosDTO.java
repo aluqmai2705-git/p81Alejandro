@@ -4,6 +4,8 @@
  */
 package Modelos;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author alejandro
@@ -15,15 +17,17 @@ public class VeterinariosDTO{
     private String name;
     private String address;
     private String phoneNumber;
+    private LocalDate birthdate;
     private String email;
 
     public VeterinariosDTO(int pk, String nif, String name, String address,
-            String phoneNumber, String email) {
+            String phoneNumber, LocalDate birthdate, String email) {
         this.pk = pk;
         this.nif = nif;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
         this.email = email;
     }
 
@@ -44,6 +48,10 @@ public class VeterinariosDTO{
 
     public String getAddress() {
         return address;
+    }
+    
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
 
     public String getPhoneNumber() {
@@ -69,6 +77,10 @@ public class VeterinariosDTO{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+    
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate= birthdate;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -87,6 +99,7 @@ public class VeterinariosDTO{
         sb.append(", name=").append(name);
         sb.append(", address=").append(address);
         sb.append(", phoneNumber=").append(phoneNumber);
+        sb.append(", birthdate=").append(birthdate);
         sb.append(", email=").append(email);
         sb.append('}');
         return sb.toString();
