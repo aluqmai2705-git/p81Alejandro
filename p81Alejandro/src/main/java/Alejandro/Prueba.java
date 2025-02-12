@@ -20,11 +20,10 @@ import java.util.List;
 
 public class Prueba {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         
         Connection con = Conexion.getInstance();
         
-        VeterinariosDAO veterinario = new VeterinariosDAO();
         
         
         

@@ -25,6 +25,7 @@ public class MascotasDAO implements IMascotas{
         con = Conexion.getInstance();
     }
     
+    @Override
      public List<MascotasDTO> getAll() throws SQLException {
         List<MascotasDTO> lista = new ArrayList<>();
 
@@ -69,6 +70,7 @@ public class MascotasDAO implements IMascotas{
         return lastId;
     }
 
+    @Override
     public MascotasDTO findByPk(int pk) throws SQLException {
 
         ResultSet res = null;
@@ -101,6 +103,7 @@ public class MascotasDAO implements IMascotas{
         }
     }
 
+    @Override
     public int insertarMascota(MascotasDTO mascota) throws SQLException {
 
         int numFilas = 0;
@@ -131,6 +134,7 @@ public class MascotasDAO implements IMascotas{
     }
 
     
+    @Override
     public int insertarMascota(List<MascotasDTO> lista) throws SQLException {
         int numFilas = 0;
 
@@ -141,6 +145,7 @@ public class MascotasDAO implements IMascotas{
         return numFilas;
     }
     
+    @Override
     public int borrarMascota() throws SQLException {
 
         String sql = "delete from mascotas";
@@ -159,6 +164,7 @@ public class MascotasDAO implements IMascotas{
 
     }
 
+    @Override
     public int borrarMascota(MascotasDTO mascota) throws SQLException {
         int numFilas = 0;
 
@@ -175,6 +181,7 @@ public class MascotasDAO implements IMascotas{
         return numFilas;
     }
 
+    @Override
     public int actualizarMascota(int pk, MascotasDTO nuevosDatos) throws SQLException {
 
         int numFilas = 0;

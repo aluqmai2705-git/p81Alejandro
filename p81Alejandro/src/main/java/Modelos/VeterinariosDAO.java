@@ -101,6 +101,7 @@ public class VeterinariosDAO implements IVeterinarios{
         }
     }
 
+    @Override
     public int insertarVeterinario(VeterinariosDTO veterinario) throws SQLException {
 
         int numFilas = 0;
@@ -131,6 +132,7 @@ public class VeterinariosDAO implements IVeterinarios{
     }
 
     
+    @Override
     public int insertarVeterinario(List<VeterinariosDTO> lista) throws SQLException {
         int numFilas = 0;
 
@@ -141,6 +143,7 @@ public class VeterinariosDAO implements IVeterinarios{
         return numFilas;
     }
     
+    @Override
     public int borrarVeterinario() throws SQLException {
 
         String sql = "delete from veterinarios";
@@ -159,6 +162,7 @@ public class VeterinariosDAO implements IVeterinarios{
 
     }
 
+    @Override
     public int borrarVeterinario(VeterinariosDTO veterinario) throws SQLException {
         int numFilas = 0;
 
@@ -175,6 +179,7 @@ public class VeterinariosDAO implements IVeterinarios{
         return numFilas;
     }
 
+    @Override
     public int actualizarVeterinario(int pk, VeterinariosDTO nuevosDatos) throws SQLException {
 
         int numFilas = 0;

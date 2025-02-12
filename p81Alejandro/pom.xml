@@ -11,5 +11,14 @@
         <maven.compiler.target>22</maven.compiler.target>
         <exec.mainClass>Alejandro.Conexion</exec.mainClass>
     </properties>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
+    </dependencies>
     <name>p81Alejandro</name>
 </project>
