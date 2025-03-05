@@ -30,6 +30,9 @@ public interface IVeterinarios {
     // Método para borrar toda la tabla
     int borrarVeterinario() throws SQLException;
     
+    //Metodo para borrar persona con el id
+    int borrarVeterinario (int idVeterinario) throws SQLException;
+    
     // Método para modificar una persona. Se modifica a la persona que tenga esa 'pk'
     // con los nuevos datos que traiga la persona 'nuevosDatos'
     int actualizarVeterinario (int pk, VeterinariosDTO nuevosDatos) throws SQLException;

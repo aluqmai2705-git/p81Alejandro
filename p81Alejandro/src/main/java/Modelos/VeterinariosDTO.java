@@ -12,30 +12,28 @@ import java.time.LocalDate;
  */
 public class VeterinariosDTO{
     
-    private int pk;
+    private int idVeterinario;
     private String nif;
     private String name;
     private String address;
     private String phoneNumber;
-    private LocalDate birthdate;
     private String email;
 
     public VeterinariosDTO(int pk, String nif, String name, String address,
-            String phoneNumber, LocalDate birthdate, String email) {
-        this.pk = pk;
+            String phoneNumber, String email) {
+        this.idVeterinario = pk;
         this.nif = nif;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.birthdate = birthdate;
         this.email = email;
     }
 
     public VeterinariosDTO() {
     }
 
-    public int getPk() {
-        return pk;
+    public int getIdVeterinario() {
+        return idVeterinario;
     }
 
     public String getNif() {
@@ -48,10 +46,6 @@ public class VeterinariosDTO{
 
     public String getAddress() {
         return address;
-    }
-    
-    public LocalDate getBirthdate() {
-        return birthdate;
     }
 
     public String getPhoneNumber() {
@@ -77,29 +71,24 @@ public class VeterinariosDTO{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate= birthdate;
-    }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPk(int pk) {
-        this.pk = pk;
+    public void setIdVeterinario(int idVeterinario) {
+        this.idVeterinario = idVeterinario;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("veterinariosDTO{");
-        sb.append("pk=").append(pk);
+        sb.append("pk=").append(idVeterinario);
         sb.append(", nif=").append(nif);
         sb.append(", name=").append(name);
         sb.append(", address=").append(address);
         sb.append(", phoneNumber=").append(phoneNumber);
-        sb.append(", birthdate=").append(birthdate);
         sb.append(", email=").append(email);
         sb.append('}');
         return sb.toString();

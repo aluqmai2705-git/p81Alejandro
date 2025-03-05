@@ -16,34 +16,34 @@ import java.time.LocalDate;
  */
 public class MascotasDTO {
     
-    private int pk;
-    private int pk_Veterinario;
+    private int idMascota;
+    private int idVeterinario;
     private String chip;
     private String name;
     private double peso;
     private LocalDate fechaNacim;
-    private String tipoMascota;
+    private String tipo;
 
     public MascotasDTO(int pk, int pk_Veterinario, String chip, String name, 
             double peso, LocalDate fechaNacimiento, String tipoMascota) {
-        this.pk = pk;
-        this.pk_Veterinario = pk_Veterinario;
+        this.idMascota = pk;
+        this.idVeterinario = pk_Veterinario;
         this.chip = chip;
         this.name = name;
         this.peso = peso;
         this.fechaNacim = fechaNacimiento;
-        this.tipoMascota = tipoMascota;
+        this.tipo = tipoMascota;
     }
 
     public MascotasDTO() {
     }
 
     public int getPk() {
-        return pk;
+        return idMascota;
     }
 
-    public int getPk_Veterinario() {
-        return pk_Veterinario;
+    public int getIdVeterinario() {
+        return idVeterinario;
     }
 
     public String getChip() {
@@ -63,15 +63,15 @@ public class MascotasDTO {
     }
 
     public String getTipoMascota() {
-        return tipoMascota;
+        return tipo;
     }
 
-    public void setPk(int pk) {
-        this.pk = pk;
+    public void setPk(int idMascota) {
+        this.idMascota = idMascota;
     }
 
-    public void setPk_Veterinario(int pk_Veterinario) {
-        this.pk_Veterinario = pk_Veterinario;
+    public void setIdVeterinario(int idVeterinario) {
+        this.idVeterinario = idVeterinario;
     }
 
     public void setChip(String chip) {
@@ -91,20 +91,20 @@ public class MascotasDTO {
     }
 
     public void setTipoMascota(String tipoMascota) {
-        this.tipoMascota = tipoMascota;
+        this.tipo = tipoMascota;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("MascotasDTO{");
-        sb.append("pk=").append(pk);
-        sb.append(", pk_Veterinario=").append(pk_Veterinario);
+        sb.append("pk=").append(idMascota);
+        sb.append(", pk_Veterinario=").append(idVeterinario);
         sb.append(", chip=").append(chip);
         sb.append(", name=").append(name);
         sb.append(", peso=").append(peso);
         sb.append(", fechaNacim=").append(fechaNacim);
-        sb.append(", tipoMascota=").append(tipoMascota);
+        sb.append(", tipoMascota=").append(tipo);
         sb.append('}');
         return sb.toString();
     }

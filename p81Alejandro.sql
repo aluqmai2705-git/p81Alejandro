@@ -27,7 +27,7 @@ nombre, peso, fecha de nacimiento, tipo (perro, gato, otros)
 
 create table if not exists `mascotas`(
 `idMascota` int(10) not null default '0',
-`idVeterinario` int(10) default null,
+`idVeterinario` int(10) default '0',
 `chip` varchar(9),
 `name` varchar(10),
 `peso` double(5 , 2),

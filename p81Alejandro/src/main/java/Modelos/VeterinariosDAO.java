@@ -31,23 +31,21 @@ public class VeterinariosDAO implements IVeterinarios{
         // ya que no necesitamos parametrizar la sentencia SQL
         try (Statement st = con.createStatement()) {
             // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
-            ResultSet res = st.executeQuery("select * from persona");
+            ResultSet res = st.executeQuery("select * from veterinarios");
             // Ahora construimos la lista, recorriendo el ResultSet y mapeando los datos
             while (res.next()) {
                 VeterinariosDTO p = new VeterinariosDTO();
                 // Recogemos los datos de la persona, guardamos en un objeto
-                p.setPk(res.getInt("pk"));
+                p.setIdVeterinario(res.getInt("idVeterinario"));
                 p.setNif(res.getString("nif"));
-                p.setName(res.getString("nombre"));
+                p.setName(res.getString("name"));
                 p.setAddress(res.getString("address"));
-                p.setPhoneNumber(res.getString("numero_telef"));
-                p.setBirthdate(res.getDate("fecha_nac").toLocalDate());
+                p.setPhoneNumber(res.getString("phoneNumber"));
                 p.setEmail(res.getString("email"));
                 //Añadimos el objeto a la lista
                 lista.add(p);
             }
         }
-
         return lista;
     }
      
@@ -57,28 +55,28 @@ public class VeterinariosDAO implements IVeterinarios{
     public int getLastInsertedId() throws SQLException {
         int lastId = 0; // Valor predeterminado si no hay registros
 
-        String query = "SELECT MAX(pk) AS pk FROM veterinarios";
+        String query = "SELECT MAX(idVeterinario) AS idVeterinario FROM veterinarios";
 
         PreparedStatement statement = con.prepareStatement(query);
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            lastId = resultSet.getInt("pk");
+            lastId = resultSet.getInt("idVeterinario");
         }
 
         return lastId;
     }
 
-    public VeterinariosDTO findByPk(int pk) throws SQLException {
+    public VeterinariosDTO findByPk(int idVeterinario) throws SQLException {
 
         ResultSet res = null;
         VeterinariosDTO persona = new VeterinariosDTO();
 
-        String sql = "select * from veterinarios where pk=?";
+        String sql = "select * from veterinarios where idVeterinario=?";
 
         try (PreparedStatement prest = con.prepareStatement(sql)) {
             // Preparamos la sentencia parametrizada
-            prest.setInt(1, pk);
+            prest.setInt(1, idVeterinario);
 
             // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
             res = prest.executeQuery();
@@ -87,12 +85,11 @@ public class VeterinariosDAO implements IVeterinarios{
             // si existe esa pk
             if (res.next()) {
                 // Recogemos los datos de la persona, guardamos en un objeto
-                persona.setPk(res.getInt("pk"));
-                persona.setName(res.getString("nombre"));
-                persona.setBirthdate(res.getDate("fecha_nac").toLocalDate());
+                persona.setIdVeterinario(res.getInt("idVeterinario"));
+                persona.setName(res.getString("name"));
                 persona.setNif(res.getString("nif"));
                 persona.setAddress(res.getString("address"));
-                persona.setPhoneNumber(res.getString("numero_telef"));
+                persona.setPhoneNumber(res.getString("phoneNumber"));
                 persona.setEmail(res.getString("email"));
                 return persona;
             }
@@ -105,9 +102,9 @@ public class VeterinariosDAO implements IVeterinarios{
     public int insertarVeterinario(VeterinariosDTO veterinario) throws SQLException {
 
         int numFilas = 0;
-        String sql = "insert into veterinarios values (?,?,?,?,?,?,?)";
+        String sql = "insert into veterinarios values (?,?,?,?,?,?)";
 
-        if (findByPk(veterinario.getPk()) != null) {
+        if (findByPk(veterinario.getIdVeterinario()) != null) {
             // Existe un registro con esa pk
             // No se hace la inserción
             return numFilas;
@@ -117,18 +114,16 @@ public class VeterinariosDAO implements IVeterinarios{
             try (PreparedStatement prest = con.prepareStatement(sql)) {
 
                 // Establecemos los parámetros de la sentencia
-                prest.setInt(1, veterinario.getPk());
+                prest.setInt(1, veterinario.getIdVeterinario());
                 prest.setString(2, veterinario.getNif());
                 prest.setString(3, veterinario.getName());
                 prest.setString(4, veterinario.getAddress());
                 prest.setString(5, veterinario.getPhoneNumber());
-                prest.setDate(6, Date.valueOf(veterinario.getBirthdate()));
-                prest.setString(7, veterinario.getEmail());
+                prest.setString(6, veterinario.getEmail());
                 numFilas = prest.executeUpdate();
             }
             return numFilas;
         }
-
     }
 
     
@@ -166,13 +161,30 @@ public class VeterinariosDAO implements IVeterinarios{
     public int borrarVeterinario(VeterinariosDTO veterinario) throws SQLException {
         int numFilas = 0;
 
-        String sql = "delete from veterinarios where pk = ?";
+        String sql = "delete from veterinarios where idVeterinario = ?";
 
         // Sentencia parametrizada
         try (PreparedStatement prest = con.prepareStatement(sql)) {
 
             // Establecemos los parámetros de la sentencia
-            prest.setInt(1, veterinario.getPk());
+            prest.setInt(1, veterinario.getIdVeterinario());
+            // Ejecutamos la sentencia
+            numFilas = prest.executeUpdate();
+        }
+        return numFilas;
+    }
+    
+    @Override
+    public int borrarVeterinario(int idVeterinario) throws SQLException {
+        int numFilas = 0;
+
+        String sql = "delete from veterinarios where idVeterinario = ?";
+
+        // Sentencia parametrizada
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+            // Establecemos los parámetros de la sentencia
+            prest.setInt(1, idVeterinario);
             // Ejecutamos la sentencia
             numFilas = prest.executeUpdate();
         }
@@ -180,13 +192,13 @@ public class VeterinariosDAO implements IVeterinarios{
     }
 
     @Override
-    public int actualizarVeterinario(int pk, VeterinariosDTO nuevosDatos) throws SQLException {
+    public int actualizarVeterinario(int idVeterinario, VeterinariosDTO nuevosDatos) throws SQLException {
 
         int numFilas = 0;
         String sql = "update veterinarios set nif= ?, name = ?, address = ?, "
-                + "phoneNumber= ?, birthdate= ?, email = ?, where pk=?";
+                + "phoneNumber= ?, email = ? where idVeterinario=?";
 
-        if (findByPk(pk) == null) {
+        if (findByPk(idVeterinario) == null) {
             // La persona a actualizar no existe
             return numFilas;
         } else {
@@ -199,9 +211,8 @@ public class VeterinariosDAO implements IVeterinarios{
                 prest.setString(2, nuevosDatos.getName());
                 prest.setString(3, nuevosDatos.getAddress());
                 prest.setString(4, nuevosDatos.getPhoneNumber());
-                prest.setDate(5, Date.valueOf(nuevosDatos.getBirthdate()));
-                prest.setString(6, nuevosDatos.getEmail());
-                prest.setInt(7, pk);
+                prest.setString(5, nuevosDatos.getEmail());
+                prest.setInt(6, idVeterinario);
 
                 numFilas = prest.executeUpdate();
             }

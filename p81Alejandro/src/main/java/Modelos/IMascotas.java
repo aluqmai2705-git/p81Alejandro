@@ -30,6 +30,9 @@ public interface IMascotas {
     // Método para borrar toda la tabla
     int borrarMascota() throws SQLException;
     
+    //Metodo para borrar una mascota con el id
+    int borrarMascota (int idMascota) throws SQLException;
+    
     // Método para modificar una persona. Se modifica a la persona que tenga esa 'pk'
     // con los nuevos datos que traiga la persona 'nuevosDatos'
     int actualizarMascota (int pk, MascotasDTO nuevosDatos) throws SQLException;
